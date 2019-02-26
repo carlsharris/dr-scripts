@@ -2085,10 +2085,10 @@ class TrainerProcess
     when 'Herbs'
       if game_state.npcs.empty?
         game_state.sheath_whirlwind_offhand
-        wait_for_script_to_complete('heal-herb',['quick'])
+        wait_for_script_to_complete('heal-remedy',['quick'])
         game_state.wield_whirlwind_offhand
       else
-        wait_for_script_to_complete('heal-herb',['quick','nohands'])
+        wait_for_script_to_complete('heal-remedy',['quick','nohands'])
       end
     end
     waitrt?
@@ -2353,8 +2353,7 @@ class TrainerProcess
     return if game_state.retreating?
 
     retreat unless DRSkill.getrank('Attunement') > 500
-    bput('perc moons', 'Roundtime')
-    bput('perc mana', 'Roundtime')
+    bput('perc mana', 'You reach out')
   end
 
   def astrology(game_state)
@@ -2764,14 +2763,14 @@ class AttackProcess
   end
 
   def aim(game_state)
-    case bput('aim', 'You begin to target', 'You are already', 'There is nothing else', 'Face what\?', 'You shift your target', 'Your repeating crossbow', 'Your assassin\'s crossbow', 'Your repeating arbalest', 'Strangely, you don\'t feel like fighting right now', 'Your riot crossbow', 'In one frozen moment')
-    when 'You are already'
+    case bput('aim', 'You begin to target', 'You are already', 'There is nothing else', 'Face what\?', 'You shift your target', 'Your repeating crossbow', 'Your assassin\'s crossbow', 'Your repeating arbalest', 'Strangely, you don\'t feel like fighting right now', 'Your riot crossbow', 'In one frozen moment', "isn't loaded")
+    when 'You are already', 'You begin to target'
       game_state.loaded = true
     when 'Your repeating crossbow', 'Your assassin\'s crossbow', 'Your riot crossbow'
       case bput('push my cross', 'A rapid series of clicks', 'You attempt to ready your repeating crossbow', 'You attempt to ready your assassin\'s crossbow', 'You attempt to ready your riot crossbow')
       when 'A rapid series of clicks'
         aim(game_state)
-      when 'You attempt to ready your repeating crossbow', 'You attempt to ready your assassin\'s crossbow', 'You attempt to ready your riot crossbow'
+      when 'You attempt to ready your repeating crossbow', 'You attempt to ready your assassin\'s crossbow', 'You attempt to ready your riot crossbow', "isn't loaded"
         game_state.loaded = false
       end
     when 'Your repeating arbalest'
@@ -3267,7 +3266,7 @@ class GameState
       'whirlwind'
     else
       action_reduce if npcs.length > 2
-      %w[jab bob feint].sample
+      %w[jab feint].sample
     end
   end
 
