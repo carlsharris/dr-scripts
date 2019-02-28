@@ -1,0 +1,754 @@
+---
+hometown: Crossing
+######################
+### STATUS MONITOR ###
+######################
+status_monitor_no_window: true
+########################
+### TRAINING-MANAGER ###
+########################
+training_manager_hunting_priority: true
+training_manager_priority_skills:
+- Targeted Magic
+- Debilitation
+- Sorcery
+training_manager_town_duration: 20
+repair_timer: 86400 # Repair once every 24 hours
+repair_withdrawal_amount: 40_000
+repair_every: .inf # Infinity
+favor_god: Meraud
+favor_goal: 10
+#####################
+### HUNTING-BUDDY ###
+#####################
+#skip_last_kill: true
+#hunting_buddies:
+#- Atanamir
+#- Leustyin
+#- Sarvatt
+#- Natarian
+#- Fuss
+#- Sheltim
+#- Rhakim
+#- Kaldean
+#- Reverence
+#- Aradar
+#- Rakkor
+#- Jonas
+#- Zansa
+#- Chuno
+#- Byd
+#
+# No hunting zones are defined here. Instead I use the hunting_file_list to point to other YAML files with hunting zomes in them.
+hunting_info:
+- :zone: gryphons3
+
+#hunting_file_list:
+#- drakes
+#- boxes
+stop_hunting_if_bleeding: true
+priority_defense: Evasion
+training_abilities:
+  Hunt: 80
+  Stealth: 60
+  PercMana: 60
+  Analyze: 70
+  Recall: 1205
+#  Astro: 220
+  App Quick: 90
+#  Locks: 120
+  Collect: 180
+
+#################
+### EQUIPMENT ###
+#################
+gear:
+#### WEAPONS ####
+- :name: riste
+  :adjective: bogbirch
+  #:tie_to: strap
+  :swappable: true
+- :name: sword
+  :adjective: bastard
+  #:tie_to: strap
+  :swappable: true
+- :name: hammer
+  :adjective: throwing
+- :name: spear
+  :adjective: light
+- :name: bola
+  :adjective: steel
+- :name: footwraps
+  :adjective: steel-toed
+  :is_worn: true
+- :adjective: knee
+  :name: spikes
+  :is_worn: true
+- :adjective: elbow
+  :name: spikes
+  :is_worn: true
+- :adjective: hand
+  :name: claws
+  :hinders_lockpicking: true
+  :is_worn: true
+##### ARMOR #####
+- :name: mask
+  :adjective: plate
+  :is_worn: true
+  :hinders_lockpicking: true
+- :adjective: small
+  :name: targe
+  :hinders_lockpicking: true
+  :is_worn: true
+  :is_leather: true
+- :adjective: scale
+  :name: helm
+  :hinders_lockpicking: true
+  :is_worn: true
+- :adjective: parry
+  :name: stick
+  :is_worn: true
+- :name: hauberk
+  :adjective: silk
+  :is_worn: true
+- :name: gloves
+  :adjective: mail
+  :hinders_lockpicking: true
+  :is_worn: true
+# Noncombat Gear with trash nouns (prevents being thrown away)
+
+gear_sets:
+  standard:
+  - targe
+  - mail gloves
+  - scale helm
+  - plate mask
+  - silk hauberk
+  - steel-toed footwraps
+  - knee spikes
+  - hand claws
+  - elbow spikes
+  - parry stick
+  stealing:
+  - elbow spikes
+  - knee spikes
+  - steel-toed footwraps
+  - parry stick
+
+weapon_training:
+  Small Edged: moonblade
+  Large Edged: bogbirch riste
+  Twohanded Edged: moonblade
+  Small Blunt: steel bola
+  Large Blunt: bogbirch riste
+  Twohanded Blunt: bogbirch riste
+  Polearms: light spear
+  Staves: moonstaff
+  Light Thrown: steel bola
+  Heavy Thrown: throwing hammer
+  Offhand Weapon: steel bola
+  Brawling: ''
+summoned_weapons:
+- name: Small Edged
+- name: Twohanded Edged
+- name: Staves
+offhand_thrown: true
+dance_skill:         Brawling
+use_weak_attacks:    false
+use_stealth_attacks: false
+ignored_npcs:
+- student
+- leopard
+- owl
+- Taala
+- foal
+- watchsoul # Cleric spell
+- appraiser # Dwarven appraiser
+- shadowling
+- Servant # Shadow Servant
+- guard # Town guard
+- zombie # necromancer pet
+### CAMBRINTH ###
+cambrinth: cambrinth armband
+cambrinth_cap: 48
+stored_cambrinth: false
+cambrinth_invoke_exact_amount: true
+cambrinth_num_charges: 1  # Number of times to harness or charge when using auto mana
+cambrinth_items:
+- name: cambrinth armband
+  cap: 48
+  stored: false
+
+### SPELLS ###
+#prep_scaling_factor: 0.91
+
+offensive_spells:
+- skill: Targeted Magic
+  name: Dinazen Olkar
+  abbrev: do
+  mana: 20
+  cambrinth:
+  - 35
+    #cast_only_to_train: true
+- skill: Debilitation
+  name: Mental Blast
+  abbrev: mb
+  mana: 38
+  harmless: true
+  # cast_only_to_train: true
+  #use_auto_mana: true
+- skill: Sorcery
+  name: Harawep's Bonds
+  abbrev: hb
+  mana: 28
+  harmless: true
+  # cast_only_to_train: true
+  #use_auto_mana: true
+
+#################
+### ASTROLOGY ###
+#################
+have_divination_bones: true
+divination_bones_storage:
+  container: toolkit
+  tied: false
+have_telescope: true
+astrology_training:
+- observe
+#- rtr
+astrology_use_full_pools: false # Helps maximize tool bonding rate when using max pools
+#############
+### ;BUFF ###
+#############
+
+## The idea here is to list each spell as its own set. This means I can call ;buff aus to cast Aura Sight if i just want to cast that single spell. It also means that I only need to define the spell once and I can use the << : merge operator to copy it into other sets.
+waggle_sets:
+  aus: &aus
+    Aura Sight:
+      mana: 30
+      recast: 6
+      cambrinth:
+      - 48
+  bc: &bc
+    Braun's Conjecture:
+      mana: 700
+      focus: staff
+      worn_focus: true
+  col: &col
+    Cage of Light:
+      cambrinth:
+      - 48
+      recast: 6
+  cv: &cv
+    Clear Vision:
+      mana: 20
+      recast: 10
+      prep_time: 3
+  dc: &dc
+    Destiny Cipher:
+      mana: 500
+      focus: staff
+      worn_focus: true
+  fm:
+    Focus Moonbeam:
+      mana: 50
+  gaf: &gaf
+    Gauge Flow:
+      mana: 52
+      cambrinth:
+      - 48
+  locate: &locate
+    Locate:
+      mana: 40
+  lw: &lw
+    Lay Ward:
+      mana: 52
+      cambrinth:
+      - 48
+  maf: &maf
+    Manifest Force:
+      recast: 5
+      cambrinth:
+      - 48
+  moonblade: &moonblade
+    Moonblade:
+      recast_every: 1400
+      cambrinth:
+      - 48
+  mt: &mt
+    Machinist's Touch:
+      cambrinth:
+      - 48
+  pg: &pg
+    Piercing Gaze:
+      mana: 20
+      recast: 10
+      cambrinth:
+      - 48
+  ts: &ts
+  Tenebrous Sense:
+      mana: 30
+      recast: 12
+      cambrinth:
+      - 48
+  rtr: &rtr
+    Read the Ripples:
+      mana: 400
+      focus: staff
+      worn_focus: true
+  seer: &seer
+    Seer's Sense:
+      recast: 26
+      mana: 40
+      cambrinth:
+      - 48
+  psy: &psy
+    Psychic Shield:
+      recast: 18
+      mana: 20
+      cambrinth:
+      - 48
+  shadows: &shadows
+    Shadows:
+      mana: 30
+      cambrinth:
+      - 48
+      recast: 2
+  sr: &sr
+    Sentinel's Resolve:
+      mana: 28
+      recast: 7
+  teleport:
+    Teleport:
+      mana: 50
+      prep_time: 10
+  iots: &iots
+    Invocation of the Spheres:
+      mana: 700
+      focus: staff
+      worn_focus: true
+      before:
+      - message: release iots
+        matches:
+        - Release what
+        - You feel the energy 
+      stats:
+      - Intelligence
+      - Agility
+  shadowling: &shadowling
+    Shadowling:
+      mana: 52
+      cambrinth:
+      - 48
+  sls: &sls
+    Starlight Sphere:
+      abbrev: sls
+      mana:   10
+      cast:   cast spider
+      night:  true
+  ###########################
+  ### SCRIPT WAGGLE SETS ###
+  ###########################
+  astrology:
+    << : *cv
+    << : *pg
+    << : *aus
+  forestry:
+    << : *ts
+  mining:
+    << : *ts
+  pick:
+    << : *mt
+  prehunt_buffs: &prehunt_buffs
+  #<< : *shadowling
+    << : *shadows
+  #<< : *iots
+    << : *seer
+    << : *ts
+    << : *col
+    << : *maf
+    << : *psy
+    << : *aus
+  default:
+    << : *prehunt_buffs
+
+buff_spells: &buff_spells
+  << : *seer
+  << : *psy
+  << : *maf
+  << : *shadows
+#  << : *sls
+#  << : *iots
+  #<< : *shadowling
+  << : *cv
+  << : *pg
+  << : *aus
+  << : *col
+  << : *moonblade
+#  Ghost Shroud:
+#    abbrev: GHS
+#    mana: 21
+#    cyclic: true
+#    day: true # Prevent it from interfemail with SLS
+######################
+### COMBAT-TRAINER ###
+######################
+dance_actions: 
+- perc planets
+- perc moons
+- perc mana
+
+loot_additions:
+- jadeite stone
+- kyanite stone
+- ju'ladan oil # enchanting
+- tooth # black apes
+- smooth rock
+- smooth rocks
+- long arrow
+- long arrows
+loot_subtractions:
+- arrow
+- shard
+loot_specials:
+- name: jadeite stone
+  bag:  pack
+- name: kyanite stone
+  bag:  pack
+####################
+### LOCKSMITHING ###
+####################
+number_of_pets_to_keep_on_hand: &box_count 5  # custom setting
+box_loot_limit: *box_count
+lockpick_buffs:
+  spells:
+  - abbrev: MT
+    mana: 52
+    cambrinth:
+    - 48
+stop_pick_on_mindlock:     true
+picking_box_source:        duffel bag
+picking_box_storage:       duffel bag
+picking_pet_box_source:    haversack
+refill_pet_boxes:          true # custom setting
+use_lockpick_mail:         true
+skip_lockpick_mail_refill: false
+lockpick_type:             stout iron
+lockpick_dismantle:        focus
+harvest_traps:             true
+#################
+### SELL LOOT ###
+#################
+gem_pouch_adjective:       red
+spare_gem_pouch_container: spider robe
+sell_loot_money_on_hand: 3 silver
+sell_loot_pouch:           false
+sell_loot_bundle:          true
+skinning:
+  skin:          true
+  arrange_all:   false
+  arrange_count: 2
+  tie_bundle:    true
+########################
+### CROSSING TRAINER ###
+########################
+braid_item: vine
+forage_item: blue flower
+listen: true
+listen_observe: true
+dump_junk: true  # Call the dump junk command after braiding or collecting when room is full of junk
+textbook: false
+crossing_training:
+# - Forging
+- Athletics
+- Locksmithing
+- Astrology
+  #- Thievery
+- Appraisal
+- Outdoorsmanship
+- Mechanical Lore
+- Warding
+- Utility
+- Augmentation
+
+classes_to_teach:
+- Stealth
+
+  #use_research: true
+  #research_skills:
+  #- Warding
+  #train_with_spells: true
+symbiosis_learning_threshold: 1
+#use_harness_when_arcana_locked: true
+#training_spells:
+#  Augmentation:
+#    abbrev: AUS
+#    symbiosis: true
+#  Warding:
+#    abbrev: CoL
+#    symbiosis: true
+#    moon: true
+#  Utility:
+#    abbrev: PG
+#    symbiosis: true
+#combat_spell_training:
+#  Utility:
+#    name: Seer Sense
+#    use_auto_mana: true
+#    symbiosis: true
+#  Warding:
+#    name: Psychic Shield
+#    mana: 30
+#    symbiosis: true
+
+#crossing_training_sorcery_room: 1645
+#crossing_training_sorcery_room: 2784
+
+#crossing_training_sorcery:
+  #  name: Ghost Shroud
+  #  abbrev: GHS
+  # mana: 20
+  #cyclic: true
+
+  #cyclic_cycle_skills:
+  # - Sorcery
+
+  #cyclic_training_spells:
+  #Sorcery:
+  #  abbrev: GHS
+  #  cyclic: true
+
+#################
+### APPRAISAL ###
+#################
+appraisal_training:
+- pouches
+- bundles
+full_pouch_container: duffel bag
+
+#############
+### STEAL ###
+#############
+#stealing_towns:
+#  - Crossing
+#  - Arthe Dale
+#  - Kaerna Village
+#  - Tiger Clan
+#  - Knife Clan
+#  - Leth Deriel
+#- Shard
+#- Horse Clan
+
+
+#################
+### MECH LORE ###
+#################
+hand_armor: mail gloves
+mech_lore_do_bead_carving: true # Carve beads to train mech lore
+##############
+### MINING ###
+##############
+mine_for_outdoorsmanship: false
+mines_to_mine:
+- ice_caves # Shard
+mine_implement: shovel
+mine_while_training: false
+mining_buddy_mine_every_room: false
+mining_buddy_vein_list:
+- Orichalcum
+- Damite
+- Kertig
+- Haralun
+- Glaes
+- Animite
+- Lumium
+################
+### CRAFTING ###
+################
+#train_workorders:
+#- Blacksmithing
+crafting_container: duffel bag
+outfitting_tools:
+- knitting needles
+### STACK-SCROLLS ###
+scroll_stackers:
+- of scrolls
+- black tome
+- wizard tome
+- scroll folio
+- scroll booklet
+- yellow notebook
+#discard_scrolls:
+#- Burden
+#- Dispel
+#- Ease Burden
+#- Gauge Flow
+#- Imbue
+#- Lay Ward
+#- Manifest Force
+#- Seal Cambrinth
+#- Strange Arrow
+#- Tremor
+#- Rite of Contrition
+#- Rite of Grace
+#- Awaken
+#- Heighten Pain
+#- Absolution
+custom_scrolls:
+- dubiously scroll
+- crinkled scroll
+- icy scroll
+- bright scroll
+- green scroll
+- pristine scroll
+- silver scroll # Stacker
+- smudged scroll # Stacker
+
+######################
+### INVASION-WATCH ###
+######################
+#invasion_watch_hideouts:
+#- 1900
+#invasion_watch_hide_time: 380
+#invasion_watch_mobs:
+#- hafwa
+#- construct
+#- malchata
+#- mouse
+#invasion_watch_rooms:
+#- 1
+#
+#textbook: true
+###################
+### COORDINATOR ###
+###################
+#
+#coordinator_hunting_tasks:
+#  - :file: cabalists
+#    :pause_sanowret: false
+#    :default: true
+#    :start_on:
+#      any_skill_under:
+#        skills:
+#        - Targeted Magic
+#        - Debilitation
+#        target: 5
+#  - :file: boxes
+#    :pause_sanowret: true
+#    :start_on:
+#      boxes_under: 1
+#    :stop_on:
+#      any_skill_under:
+#        skills:
+#        - Targeted Magic
+#        - Debilitation
+#        target: 5
+#  - :file: back_weapons
+#    :pause_sanowret: true
+#    :start_on:
+#      any_skill_under:
+#        skills:
+#        - Slings
+#        - Small Edged
+#        target: 1
+#    :stop_on:
+#      any_skill_under:
+#        skills:
+#        - Targeted Magic
+#        - Debilitation
+#        target: 5
+
+safe_room: 7665
+
+#coordinator_hunting_cleanup:
+#  - :script: safe-room
+#  - :script: sell-loot
+#    :skip_first_run: true
+#  - :script: crossing-repair
+#    :skip_first_run: true
+#    :start_on:
+#      timer:
+#        global: true
+#        time: 43200 
+#        key: 'repair'
+#
+#coordinator_town_tasks:
+#  - :script: astrology
+#    :start_on:
+#      and:
+#        - timer:
+#            global: true
+#            time: 300
+#            key: 'astro'
+#        - skill_under:
+#            skill: Astrology
+#            target: 5
+#    :walk_to: safe_room
+#  - :script: athletics
+#    :args:
+#    - wyvern
+#    :start_on:
+#      skill_under:
+#        skill: Athletics
+#        target: 10
+#  - :script: nexus
+#    :args:
+#    - fatigue
+#    - 793
+#    :start_on:
+#      timer:
+#        global: true
+#        time: 18000 # 5 hours
+#        key: 'nexus'
+#  - :script: sorcery
+#    :start_on:
+#      and:
+#        - timer:
+#            global: true
+#            time: 300
+#            key: 'cyclic'
+#        - skill_under:
+#            skill: Sorcery
+#            target: 5
+##  - :script: mech-lore
+##    :walk_to: safe_room 
+##    :start_on:
+##      skill_under:
+##        skill: Mechanical Lore
+##        target: 14
+#  - :script: appraisal
+#    :walk_to: safe_room
+#    :start_on:
+#      and:
+#        - timer:
+#            global: true
+#            time: 300
+#            key: 'appraisal'
+#        - skill_under:
+#            skill: Appraisal
+#            target: 5
+##  - :script: first-aid
+##    :walk_to: safe_room
+##    :start_on:
+##      skill_under:
+##        skill: First Aid
+##        target: 1
+#  - :script: outdoorsmanship
+#    :walk_to: safe_room
+#    :start_on:
+#      and:
+#        - predicate: hunt_done?
+#        - skill_under:
+#            skill: Outdoorsmanship
+#            target: 20
+#  - :action: pick_boxes
+#    :walk_to: safe_room
+#    :start_on:
+#      and:
+#        - skill_under:
+#            skill: Locksmithing
+#            target: 14
+#        - or:
+#            - boxes_over: 0
+#            - predicate: pet_boxes?
+#...
