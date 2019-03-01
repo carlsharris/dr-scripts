@@ -4,8 +4,6 @@ hometown: Crossing
 ### STATUS MONITOR ###
 ######################
 status_monitor_no_window: true
-#combat_trainer_action_count:
-#combat_trainer_target_increment:
 ########################
 ### TRAINING-MANAGER ###
 ########################
@@ -43,8 +41,15 @@ hunting_buddies:
 - Atazai
 #
 # No hunting zones are defined here. Instead I use the hunting_file_list to point to other YAML files with hunting zomes in them.
+#combat_trainer_action_count:
+combat_trainer_target_increment: 10
 hunting_info:
 - :zone: gryphons3
+  :stop_on:
+    - Debilitation
+    - Targeted Magic
+    - Evasion
+    - Skinning
 
 #hunting_file_list:
 #- drakes
@@ -52,15 +57,15 @@ hunting_info:
 stop_hunting_if_bleeding: true
 priority_defense: Evasion
 training_abilities:
-  Hunt: 120
+  Hunt: 180
   Stealth: 60
   PercMana: 150
   Analyze: 180
-  Recall: 1205
-#  Astro: 220
+  Tactics: 90
   App Quick: 90
-#  Locks: 120
   Collect: 240
+#  Astro: 220
+#  Locks: 120
 #################
 ### EQUIPMENT ###
 #################
@@ -121,7 +126,7 @@ gear:
 
 gear_sets:
   standard:
-  - targe
+  - steel targe
   - mail gloves
   - scale helm
   - plate mask
@@ -184,29 +189,6 @@ cambrinth_items:
 ### SPELLS ###
 #prep_scaling_factor: 0.91
 
-offensive_spells:
-- skill: Targeted Magic
-  name: Dinazen Olkar
-  abbrev: do
-  mana: 20
-  cambrinth:
-  - 35
-    #cast_only_to_train: true
-- skill: Debilitation
-  name: Mental Blast
-  abbrev: mb
-  mana: 38
-  harmless: true
-  # cast_only_to_train: true
-  #use_auto_mana: true
-- skill: Sorcery
-  name: Harawep's Bonds
-  abbrev: hb
-  mana: 28
-  harmless: true
-  # cast_only_to_train: true
-  #use_auto_mana: true
-
 #################
 ### ASTROLOGY ###
 #################
@@ -217,7 +199,7 @@ astrology_training:
 #- rtr
 - weather
 - events
-- moons
+- attunement
 #astral_plane_training:
   #train_destination: crossing 
   #train_source: shard
@@ -311,7 +293,7 @@ waggle_sets:
       - 24
       - 24
   ts: &ts
-  Tenebrous Sense:
+    Tenebrous Sense:
       mana: 32
       recast: 17
       cambrinth:
@@ -456,12 +438,6 @@ loot_specials:
 ####################
 number_of_pets_to_keep_on_hand: &box_count 5  # custom setting
 box_loot_limit: *box_count
-lockpick_buffs:
-  spells:
-  - abbrev: MT
-    mana: 52
-    cambrinth:
-    - 48
 stop_pick_on_mindlock:     true
 picking_box_source:        duffel bag
 picking_box_storage:       duffel bag
@@ -503,9 +479,9 @@ crossing_training:
 - Appraisal
 - Outdoorsmanship
 - Mechanical Lore
-- Warding
-- Utility
-- Augmentation
+  #- Warding
+  #- Utility
+  #- Augmentation
 
 classes_to_teach:
 - Stealth
@@ -515,18 +491,41 @@ classes_to_teach:
   #- Warding
   #train_with_spells: true
 symbiosis_learning_threshold: 1
-#magic_exp_training_max_threshold:20
+magic_exp_training_max_threshold: 18
 #use_harness_when_arcana_locked: true
+offensive_spells:
+- skill: Targeted Magic
+  name: Dinazen Olkar
+  abbrev: do
+  mana: 20
+  cambrinth:
+  - 24
+    #cast_only_to_train: true
+- skill: Debilitation
+  name: Mental Blast
+  abbrev: mb
+  mana: 38
+  harmless: true
+  # cast_only_to_train: true
+  #use_auto_mana: true
+- skill: Sorcery
+  name: Harawep's Bonds
+  abbrev: hb
+  mana: 28
+  harmless: true
+  # cast_only_to_train: true
+  #use_auto_mana: true
+
 combat_spell_training:
   Utility:
-    name: Seer Sense
+    name: Seer's Sense
     abbrev: seer
-    mana: 45
+    mana: 40
     symbiosis: true
   Warding:
     name: Cage of Light
     abbrev: col
-    mana: 48
+    mana: 40
     symbiosis: true
 #crossing_training_sorcery_room: 1645
 #crossing_training_sorcery_room: 2784
@@ -550,7 +549,10 @@ combat_spell_training:
 #################
 appraisal_training:
 - pouches
-- bundles
+- bundle
+- gear
+- art
+- zills
 full_pouch_container: duffel bag
 
 #############
