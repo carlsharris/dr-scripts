@@ -4,6 +4,8 @@ hometown: Crossing
 ### STATUS MONITOR ###
 ######################
 status_monitor_no_window: true
+#combat_trainer_action_count:
+#combat_trainer_target_increment:
 ########################
 ### TRAINING-MANAGER ###
 ########################
@@ -22,22 +24,23 @@ favor_goal: 10
 ### HUNTING-BUDDY ###
 #####################
 #skip_last_kill: true
-#hunting_buddies:
-#- Atanamir
-#- Leustyin
-#- Sarvatt
-#- Natarian
-#- Fuss
-#- Sheltim
-#- Rhakim
-#- Kaldean
-#- Reverence
-#- Aradar
-#- Rakkor
-#- Jonas
-#- Zansa
-#- Chuno
-#- Byd
+hunting_buddies:
+- Atanamir
+- Leustyin
+- Sarvatt
+- Natarian
+- Fuss
+- Sheltim
+- Rhakim
+- Kaldean
+- Reverence
+- Aradar
+- Rakkor
+- Jonas
+- Zansa
+- Chuno
+- Byd
+- Atazai
 #
 # No hunting zones are defined here. Instead I use the hunting_file_list to point to other YAML files with hunting zomes in them.
 hunting_info:
@@ -49,16 +52,15 @@ hunting_info:
 stop_hunting_if_bleeding: true
 priority_defense: Evasion
 training_abilities:
-  Hunt: 80
+  Hunt: 120
   Stealth: 60
-  PercMana: 60
-  Analyze: 70
+  PercMana: 150
+  Analyze: 180
   Recall: 1205
 #  Astro: 220
   App Quick: 90
 #  Locks: 120
-  Collect: 180
-
+  Collect: 240
 #################
 ### EQUIPMENT ###
 #################
@@ -96,7 +98,7 @@ gear:
   :adjective: plate
   :is_worn: true
   :hinders_lockpicking: true
-- :adjective: small
+- :adjective: steel
   :name: targe
   :hinders_lockpicking: true
   :is_worn: true
@@ -208,15 +210,26 @@ offensive_spells:
 #################
 ### ASTROLOGY ###
 #################
-have_divination_bones: true
-divination_bones_storage:
-  container: toolkit
-  tied: false
-have_telescope: true
+astrology_use_full_pools: false # Helps maximize tool bonding rate when using max pools
 astrology_training:
+- ways
 - observe
 #- rtr
-astrology_use_full_pools: false # Helps maximize tool bonding rate when using max pools
+- weather
+- events
+- moons
+#astral_plane_training:
+  #train_destination: crossing 
+  #train_source: shard
+have_divination_bones: true
+have_telescope: true
+divination_bones_storage:
+  container: belt
+  tied: false
+divination_tool:
+   name: divination bones
+   container: belt
+   tied: false
 #############
 ### ;BUFF ###
 #############
@@ -225,10 +238,11 @@ astrology_use_full_pools: false # Helps maximize tool bonding rate when using ma
 waggle_sets:
   aus: &aus
     Aura Sight:
-      mana: 30
-      recast: 6
+      mana: 42
+      recast: 16
       cambrinth:
-      - 48
+      - 24
+      - 24
   bc: &bc
     Braun's Conjecture:
       mana: 700
@@ -236,14 +250,18 @@ waggle_sets:
       worn_focus: true
   col: &col
     Cage of Light:
+      mana: 42
       cambrinth:
-      - 48
-      recast: 6
+      - 24
+      - 24
+      recast: 16
   cv: &cv
     Clear Vision:
-      mana: 20
+      mana: 32
       recast: 10
-      prep_time: 3
+      cambrinth:
+      - 24
+      - 24
   dc: &dc
     Destiny Cipher:
       mana: 500
@@ -264,33 +282,41 @@ waggle_sets:
     Lay Ward:
       mana: 52
       cambrinth:
-      - 48
+      - 24
+      - 24
   maf: &maf
     Manifest Force:
-      recast: 5
+      mana: 42
+      recast: 13
       cambrinth:
-      - 48
+      - 24
+      - 24
   moonblade: &moonblade
     Moonblade:
+      mana: 42
       recast_every: 1400
       cambrinth:
-      - 48
+      - 24
+      - 24
   mt: &mt
     Machinist's Touch:
       cambrinth:
-      - 48
+      - 24
+      - 24
   pg: &pg
     Piercing Gaze:
-      mana: 20
-      recast: 10
+      mana: 32
+      recast: 15
       cambrinth:
-      - 48
+      - 24
+      - 24
   ts: &ts
   Tenebrous Sense:
-      mana: 30
-      recast: 12
+      mana: 32
+      recast: 17
       cambrinth:
-      - 48
+      - 24
+      - 24
   rtr: &rtr
     Read the Ripples:
       mana: 400
@@ -298,26 +324,31 @@ waggle_sets:
       worn_focus: true
   seer: &seer
     Seer's Sense:
-      recast: 26
-      mana: 40
+      recast: 18
+      mana: 42
       cambrinth:
-      - 48
+      - 24
+      - 24
   psy: &psy
     Psychic Shield:
       recast: 18
-      mana: 20
+      mana: 42
       cambrinth:
-      - 48
+      - 24
+      - 24
   shadows: &shadows
     Shadows:
-      mana: 30
+      mana: 42
       cambrinth:
-      - 48
+      - 24
+      - 24
       recast: 2
   sr: &sr
     Sentinel's Resolve:
       mana: 28
-      recast: 7
+      cambrinth:
+        - 22
+      recast: 17
   teleport:
     Teleport:
       mana: 50
@@ -369,6 +400,9 @@ waggle_sets:
     << : *maf
     << : *psy
     << : *aus
+    << : *pg
+    << : *cv
+    << : *sr
   default:
     << : *prehunt_buffs
 
@@ -381,7 +415,9 @@ buff_spells: &buff_spells
 #  << : *iots
   #<< : *shadowling
   << : *cv
+  << : *sr
   << : *pg
+  << : *ts
   << : *aus
   << : *col
   << : *moonblade
@@ -393,7 +429,7 @@ buff_spells: &buff_spells
 ######################
 ### COMBAT-TRAINER ###
 ######################
-dance_actions: 
+dance_actions:
 - perc planets
 - perc moons
 - perc mana
@@ -440,7 +476,7 @@ harvest_traps:             true
 ### SELL LOOT ###
 #################
 gem_pouch_adjective:       red
-spare_gem_pouch_container: spider robe
+spare_gem_pouch_container: lunch pail
 sell_loot_money_on_hand: 3 silver
 sell_loot_pouch:           false
 sell_loot_bundle:          true
@@ -479,28 +515,19 @@ classes_to_teach:
   #- Warding
   #train_with_spells: true
 symbiosis_learning_threshold: 1
+#magic_exp_training_max_threshold:20
 #use_harness_when_arcana_locked: true
-#training_spells:
-#  Augmentation:
-#    abbrev: AUS
-#    symbiosis: true
-#  Warding:
-#    abbrev: CoL
-#    symbiosis: true
-#    moon: true
-#  Utility:
-#    abbrev: PG
-#    symbiosis: true
-#combat_spell_training:
-#  Utility:
-#    name: Seer Sense
-#    use_auto_mana: true
-#    symbiosis: true
-#  Warding:
-#    name: Psychic Shield
-#    mana: 30
-#    symbiosis: true
-
+combat_spell_training:
+  Utility:
+    name: Seer Sense
+    abbrev: seer
+    mana: 45
+    symbiosis: true
+  Warding:
+    name: Cage of Light
+    abbrev: col
+    mana: 48
+    symbiosis: true
 #crossing_training_sorcery_room: 1645
 #crossing_training_sorcery_room: 2784
 

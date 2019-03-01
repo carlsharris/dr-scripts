@@ -2353,8 +2353,10 @@ class TrainerProcess
     return if game_state.retreating?
 
     retreat unless DRSkill.getrank('Attunement') > 500
-    bput('perc moons', 'You reach out')
-    bput('perc mana', 'You reach out')
+    if 32 > DRSkill.getxp('Attunement')
+      bput('perc mana', 'You reach out')
+    end
+    bput('perc moons', 'Roundtime')
   end
 
   def astrology(game_state)
