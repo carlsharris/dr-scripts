@@ -2397,31 +2397,32 @@ class TrainerProcess
       planetary.each do |planet|
         if UserVars.heavens.include?(planet)
           retreat
-          case bput('observe ' + planet, 'Roundtime', 'You are far', 'turns up fruitless')
-          when 'Roundtime'
-            return
-          when 'You are far'
-            DRC.retreat
-          when 'turns up fruitless'
-            check_heavens(game_state)
-          end
+          observe(planet)
+          return
         end
       end
       UserVars.constellation_map.keys.reverse.slice(4,22).each do |const|
         if UserVars.heavens.include?(const)
           retreat
-          case bput('observe ' + planet, 'Roundtime', 'You are far', 'turns up fruitless')
-          when 'Roundtime'
-            return
-          when 'You are far'
-            DRC.retreat
-          when 'turns up fruitless'
-            check_heavens(game_state)
-          end
+          observe(const)
           return
         end
       end
     end
+
+  def observe(target, game_state)
+    case bput('observe ' + target, 'You see nothing', 'Roundtime', 'You are far', 'turns up fruitless')
+    when 'You see nothing'
+      observe(target, game_state)
+    when 'Roundtime'
+      return
+    when 'You are far'
+      DRC.retreat
+      observe(target, game_state)
+    when 'turns up fruitless'
+      check_heavens(game_state)
+    end
+
 
   def determine_time
     echo 'Determining time'
