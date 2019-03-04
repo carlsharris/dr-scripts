@@ -144,12 +144,12 @@ gear_sets:
 
 weapon_training:
   Small Edged: moonblade
-  Large Edged: bogbirch riste
+  Large Edged: moonblade
   Twohanded Edged: moonblade
   Small Blunt: steel bola
-  Large Blunt: bogbirch riste
-  Twohanded Blunt: bogbirch riste
-  Polearms: light spear
+#  Large Blunt: bogbirch riste
+#  Twohanded Blunt: bogbirch riste
+#  Polearms: light spear
   Staves: moonstaff
   Light Thrown: steel bola
   Heavy Thrown: throwing hammer
@@ -157,6 +157,7 @@ weapon_training:
   Brawling: ''
 summoned_weapons:
 - name: Small Edged
+- name: Large Edged
 - name: Twohanded Edged
 - name: Staves
 offhand_thrown: true
@@ -222,6 +223,12 @@ waggle_sets:
     Aura Sight:
       mana: 42
       recast: 16
+      cambrinth:
+      - 24
+      - 24
+  dg: &dg
+    Distant Gaze:
+      mana: 42
       cambrinth:
       - 24
       - 24
@@ -451,8 +458,8 @@ harvest_traps:             true
 #################
 ### SELL LOOT ###
 #################
-gem_pouch_adjective:       red
-spare_gem_pouch_container: lunch pail
+gem_pouch_adjective:       paisley
+spare_gem_pouch_container: spidersilk robe
 sell_loot_money_on_hand: 3 silver
 sell_loot_pouch:           false
 sell_loot_bundle:          true
@@ -491,7 +498,7 @@ classes_to_teach:
   #- Warding
   #train_with_spells: true
 symbiosis_learning_threshold: 1
-magic_exp_training_max_threshold: 18
+#magic_exp_training_max_threshold: 18
 #use_harness_when_arcana_locked: true
 offensive_spells:
 - skill: Targeted Magic
@@ -517,6 +524,11 @@ offensive_spells:
   #use_auto_mana: true
 
 combat_spell_training:
+  Augmentation:
+    name: Seer's Sense
+    abbrev: seer
+    mana: 40
+    symbiosis: true
   Utility:
     name: Seer's Sense
     abbrev: seer
