@@ -2422,6 +2422,7 @@ class TrainerProcess
     when 'turns up fruitless'
       check_heavens(game_state)
     end
+  end
 
 
   def determine_time
