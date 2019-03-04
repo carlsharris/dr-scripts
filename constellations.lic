@@ -1,7 +1,9 @@
 spell_prep = false
-UserVars.constellation_map = {"Dergati's Eye"=>[125, ["Magic", "Lore"]], "Heart"=>[1, ["Survival"]], "Wolf"=>[2, ["Magic"]], "Lion"=>[3, ["Armor", "Survival"]], "Raven"=>[4, ["Lore"]], "Unicorn"=>[5, ["Survival"]], "Boar"=>[6, ["Weapon", "Survival"]], "Panther"=>[7, ["Survival", "Weapon"]], "Cobra"=>[8, ["Lore", "Magic"]], "Ox"=>[9, ["Survival", "Magic"]], "Scorpion"=>[10, ["Armor", "Weapon"]], "Wren"=>[11, ["Magic", "Lore"]], "Cat"=>[12, ["Weapon"]], "Ram"=>[13, ["Survival"]], "Dolphin"=>[14, ["Lore", "Survival"]], "Shardstar"=>[15, ["Armor", "Lore"]], "Nightingale"=>[15, ["Magic", "Armor"]], "Wolverine"=>[16, ["Weapon", "Survival"]], "Centaur"=>[17, ["Weapon", "Armor"]], "Magpie"=>[18, ["Armor"]], "Weasel"=>[19, ["Lore", "Weapon"]], "King Snake"=>[20, ["Lore", "Armor"]], "Viper"=>[21, ["Weapon"]], "Albatross"=>[22, ["Lore", "Armor"]], "Shark"=>[23, ["Weapon", "Survival"]], "Donkey"=>[24, ["Lore", "Magic"]], "Coyote"=>[25, ["Magic", "Weapon"]], "Dove"=>[26, ["Magic", "Armor"]], "Phoenix"=>[27, ["Magic", "Lore"]], "Heron"=>[28, ["Lore", "Survival"]], "Mongoose"=>[29, ["Armor", "Weapon"]], "Goshawk"=>[30, ["Survival", "Armor"]], "Owl"=>[31, ["Magic", "Weapon"]], "Welkin"=>[32, ["Lore", "Armor"]], "Raccoon"=>[33, ["Survival", "Armor"]], "Cow"=>[34, ["Magic", "Survival"]], "Adder"=>[35, ["Weapon", "Magic"]], "Vulture"=>[36, ["Survival", "Armor"]], "Shrew"=>[37, ["Magic", "Weapon"]], "Shrike"=>[38, ["Survival", "Magic"]], "Jackal"=>[39, ["Armor", "Magic"]], "Spider"=>[40, ["Weapon"]], "Giant"=>[41, ["Armor"]], "Hare"=>[42, ["Armor", "Lore"]], "Toad"=>[44, ["Magic"]], "Archer"=>[45, ["Weapon", "Survival"]], "Brigantine"=>[47, ["Survival", "Lore"]], "Scales"=>[48, ["Lore", "Weapon"]], "Triquetra"=>[50, ["Weapon", "Survival"]],"Yavash"=>[0, ["Magic"]],"Xibar"=>[0, ["Magic"]],"Katamba"=>[0, ["Magic"]]}
+constellation_map = {"Dergati's Eye"=>[125, ["Magic", "Lore"]], "Heart"=>[1, ["Survival"]], "Wolf"=>[2, ["Magic"]], "Lion"=>[3, ["Armor", "Survival"]], "Raven"=>[4, ["Lore"]], "Unicorn"=>[5, ["Survival"]], "Boar"=>[6, ["Weapon", "Survival"]], "Panther"=>[7, ["Survival", "Weapon"]], "Cobra"=>[8, ["Lore", "Magic"]], "Ox"=>[9, ["Survival", "Magic"]], "Scorpion"=>[10, ["Armor", "Weapon"]], "Wren"=>[11, ["Magic", "Lore"]], "Cat"=>[12, ["Weapon"]], "Ram"=>[13, ["Survival"]], "Dolphin"=>[14, ["Lore", "Survival"]], "Shardstar"=>[15, ["Armor", "Lore"]], "Nightingale"=>[15, ["Magic", "Armor"]], "Wolverine"=>[16, ["Weapon", "Survival"]], "Centaur"=>[17, ["Weapon", "Armor"]], "Magpie"=>[18, ["Armor"]], "Weasel"=>[19, ["Lore", "Weapon"]], "King Snake"=>[20, ["Lore", "Armor"]], "Viper"=>[21, ["Weapon"]], "Albatross"=>[22, ["Lore", "Armor"]], "Shark"=>[23, ["Weapon", "Survival"]], "Donkey"=>[24, ["Lore", "Magic"]], "Coyote"=>[25, ["Magic", "Weapon"]], "Dove"=>[26, ["Magic", "Armor"]], "Phoenix"=>[27, ["Magic", "Lore"]], "Heron"=>[28, ["Lore", "Survival"]], "Mongoose"=>[29, ["Armor", "Weapon"]], "Goshawk"=>[30, ["Survival", "Armor"]], "Owl"=>[31, ["Magic", "Weapon"]], "Welkin"=>[32, ["Lore", "Armor"]], "Raccoon"=>[33, ["Survival", "Armor"]], "Cow"=>[34, ["Magic", "Survival"]], "Adder"=>[35, ["Weapon", "Magic"]], "Vulture"=>[36, ["Survival", "Armor"]], "Shrew"=>[37, ["Magic", "Weapon"]], "Shrike"=>[38, ["Survival", "Magic"]], "Jackal"=>[39, ["Armor", "Magic"]], "Spider"=>[40, ["Weapon"]], "Giant"=>[41, ["Armor"]], "Hare"=>[42, ["Armor", "Lore"]], "Toad"=>[44, ["Magic"]], "Archer"=>[45, ["Weapon", "Survival"]], "Brigantine"=>[47, ["Survival", "Lore"]], "Scales"=>[48, ["Lore", "Weapon"]], "Triquetra"=>[50, ["Weapon", "Survival"]],"Yavash"=>[0, ["Magic"]],"Xibar"=>[0, ["Magic"]],"Katamba"=>[0, ["Magic"]]}
 
-planetary = ["sun","Verena","Estrilda","Yoakena","Szelda""Dawgolesh"]
+UserVars.constellation_map = constellation_map
+
+planetary = ["Dawgolesh","Verena","Estrilda","Yoakena","Szelda"]
 goto "observe"
 
 observe:
@@ -17,7 +19,7 @@ constellations.each do |row|
   end
 end
 
-UserVars.heavens =  observe 
+UserVars.heavens =  observe
 
 #
 #echo("Constellations: #{observe}")

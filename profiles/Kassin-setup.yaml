@@ -64,7 +64,7 @@ training_abilities:
   Tactics: 90
   App Quick: 90
   Collect: 240
-#  Astro: 220
+  Astro: 300
 #  Locks: 120
 #################
 ### EQUIPMENT ###

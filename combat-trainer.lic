@@ -2361,7 +2361,6 @@ class TrainerProcess
 
   def astrology(game_state)
     return if game_state.retreating?
-
     retreat
     if DRSkill.getrank('Astrology') <= 120
       bput('predict weather', 'You predict that', 'You are far too', 'you lack the skill to grasp them fully')
@@ -2369,23 +2368,60 @@ class TrainerProcess
       fput('engage')
     else
       retreat
-      check_heavens(game_state)
+      observe_heavens(game_state)
       Flags.reset('bad-search')
     end
   end
 
   def check_heavens(game_state)
-    @equipment_manager.stow_weapon(game_state.weapon_name)
-    case DRC.bput('get my telescope', 'You get a', 'You need a free hand to pick that up.', 'You are already holding that.')
-    when 'You get a'
-      determine_time
-    when 'You need a free hand to pick that up.'
-      return
-    when 'You are already holding that.'
-      determine_time
+    case bput('observe heavens', 'Roundtime', 'You are far')
+    when 'Roundtime'
+      constellations = reget(50).reverse.take_while{|x| x !~ /heavenly bodies are visible/}.reverse.take_while{|x| x !~ /roundtime/} 
+    when 'You are far'
+      retreat
+      check_heavens(game_state)
     end
-    @equipment_manager.wield_weapon(game_state.weapon_name, game_state.weapon_skill)
+    observe = []
+    constellations.each do |row|
+      row.split(' ').each do |r|
+        observe << r if planetary.include?(r)
+        observe << r if constellation_map.keys.include?(r)
+      end
+    end
+    UserVars.heavens =  observe
+    observe_heavens(game_state)
   end
+
+    def observe_heavens(game_state)
+      planetary = ["Dawgolesh","Verena","Estrilda","Yoakena","Szelda"]
+      planetary.each do |planet|
+        if UserVars.heavens.include?(planet)
+          retreat
+          case bput('observe ' + planet, 'Roundtime', 'You are far', 'turns up fruitless')
+          when 'Roundtime'
+            return
+          when 'You are far'
+            DRC.retreat
+          when 'turns up fruitless'
+            check_heavens(game_state)
+          end
+        end
+      end
+      UserVars.constellation_map.keys.reverse.slice(4,22).each do |const|
+        if UserVars.heavens.include?(const)
+          retreat
+          case bput('observe ' + planet, 'Roundtime', 'You are far', 'turns up fruitless')
+          when 'Roundtime'
+            return
+          when 'You are far'
+            DRC.retreat
+          when 'turns up fruitless'
+            check_heavens(game_state)
+          end
+          return
+        end
+      end
+    end
 
   def determine_time
     echo 'Determining time'
@@ -2401,7 +2437,7 @@ class TrainerProcess
     case DRCMM.center_telescope_on(target)
     when "That's a bit tough to do when you can't see the sky", 'Your search for'
       stow_telescope
-    else 
+    else
       observe
     end
   end
